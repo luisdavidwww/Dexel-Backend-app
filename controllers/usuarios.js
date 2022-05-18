@@ -25,10 +25,22 @@ const usuariosGet = async(req = request, res = response) => {
     });
 }
 
+//Buscar Usuario
+const usuarioGet = async (req, res = response) => {
+    const { id } = req.params;
+
+    const user = await Usuario.findById(id).populate('usuario', 'nombre');
+    res.json(user);
+  };
+
+
+
+
+//crearUsuario
 const usuariosPost = async(req, res = response) => {
     
-    const { nombre, correo, password, rol } = req.body;
-    const usuario = new Usuario({ nombre, correo, password, rol });
+    const { nombre, correo, password, rol, nombreReal, apellido, descripcion, fechaNac } = req.body;
+    const usuario = new Usuario({ nombre, correo, password, rol, nombreReal, apellido, descripcion, fechaNac });
 
     // Encriptar la contraseña
     const salt = bcryptjs.genSaltSync();
@@ -46,6 +58,9 @@ const usuariosPost = async(req, res = response) => {
     });
 }
 
+
+
+//Actualizar Usuario Global
 const usuariosPut = async(req, res = response) => {
 
     const { id } = req.params;
@@ -61,6 +76,53 @@ const usuariosPut = async(req, res = response) => {
 
     res.json(usuario);
 }
+
+
+//Actualizar Nombre Real
+const usuariosPutnombreRel = async(req, res = response) => {
+
+    const { id } = req.params;
+    const { _id, nombreReal } = req.body;
+
+    if ( password ) {
+        // Encriptar la contraseña
+        const salt = bcryptjs.genSaltSync();
+        resto.password = bcryptjs.hashSync( password, salt );
+    }
+
+    const usuario = await Usuario.findByIdAndUpdate( id, nombreReal );
+
+    res.json(usuario);
+}
+
+
+
+//Actualizar Apellido
+const usuariosPutApellido = async(req, res = response) => {
+
+    const { id } = req.params;
+    const { _id, apellido } = req.body;
+
+    const usuario = await Usuario.findByIdAndUpdate( id, apellido );
+
+    res.json(usuario);
+}
+
+
+//Actualizar Contraseña
+const usuariosPutContraseña = async(req, res = response) => {
+
+    const { id } = req.params;
+    const { _id, password } = req.body;
+
+    const usuario = await Usuario.findByIdAndUpdate( id, password );
+
+    res.json(usuario);
+}
+
+
+
+
 
 const usuariosPatch = (req, res = response) => {
     res.json({
@@ -82,8 +144,11 @@ const usuariosDelete = async(req, res = response) => {
 
 module.exports = {
     usuariosGet,
+    usuarioGet,
     usuariosPost,
     usuariosPut,
     usuariosPatch,
     usuariosDelete,
+    usuariosPutnombreRel,
+    usuariosPutApellido
 }

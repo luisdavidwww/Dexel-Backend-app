@@ -15,6 +15,22 @@ const UsuarioSchema = Schema({
         type: String,
         required: [true, 'La contraseña es obligatoria'],
     },
+    nombreReal: { 
+        type: String,
+        default: '', 
+    },
+    apellido: { 
+        type: String,
+        default: '',
+     },
+    descripcion: { 
+        type: String,
+        default: '',
+     },
+    fechaNac: { 
+        type: Date,
+        default: Date("2021-10-28")
+    },
     img: {
         type: String,
     },

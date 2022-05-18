@@ -13,9 +13,12 @@ const {
 const { esRoleValido, emailExiste, existeUsuarioPorId } = require('../helpers/db-validators');
 
 const { usuariosGet,
+        usuarioGet,
         usuariosPut,
         usuariosPost,
         usuariosDelete,
+        usuariosPutnombreRel,
+        usuariosPutApellido,
         usuariosPatch } = require('../controllers/usuarios');
 
 const router = Router();
@@ -23,12 +26,38 @@ const router = Router();
 
 router.get('/', usuariosGet );
 
+
+router.get('/:id',[
+    check('id', 'No es un id de Mongo válido').isMongoId(),
+    check('id').custom( existeUsuarioPorId ),
+], usuarioGet );
+
+//Actualizar Usuario Global
 router.put('/:id',[
     check('id', 'No es un ID válido').isMongoId(),
     check('id').custom( existeUsuarioPorId ),
     check('rol').custom( esRoleValido ), 
     validarCampos
 ],usuariosPut );
+
+
+//Actualizar Nombre Real
+router.put('/:id',[
+    check('id', 'No es un ID válido').isMongoId(),
+    check('id').custom( existeUsuarioPorId ),
+    check('rol').custom( esRoleValido ), 
+    validarCampos
+],usuariosPutnombreRel );
+
+
+//Actualizar Apellido
+router.put('/:id',[
+    check('id', 'No es un ID válido').isMongoId(),
+    check('id').custom( existeUsuarioPorId ),
+    check('rol').custom( esRoleValido ), 
+    validarCampos
+],usuariosPutApellido );
+
 
 router.post('/',[
     check('nombre', 'El nombre es obligatorio').not().isEmpty(),
