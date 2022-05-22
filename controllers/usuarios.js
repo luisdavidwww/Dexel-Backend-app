@@ -120,6 +120,17 @@ const usuariosPutContraseña = async(req, res = response) => {
     res.json(usuario);
 }
 
+//Actualizar Descripcion
+const usuariosPutDescripcion = async(req, res = response) => {
+
+    const { id } = req.params;
+    const { _id, descripcion } = req.body;
+
+    const usuario = await Usuario.findByIdAndUpdate( id, descripcion );
+
+    res.json(usuario);
+}
+
 
 
 
@@ -150,5 +161,6 @@ module.exports = {
     usuariosPatch,
     usuariosDelete,
     usuariosPutnombreRel,
-    usuariosPutApellido
+    usuariosPutApellido,
+    usuariosPutDescripcion
 }
