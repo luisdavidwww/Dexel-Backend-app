@@ -78,61 +78,6 @@ const usuariosPut = async(req, res = response) => {
 }
 
 
-//Actualizar Nombre Real
-const usuariosPutnombreRel = async(req, res = response) => {
-
-    const { id } = req.params;
-    const { _id, nombreReal } = req.body;
-
-    if ( password ) {
-        // Encriptar la contraseña
-        const salt = bcryptjs.genSaltSync();
-        resto.password = bcryptjs.hashSync( password, salt );
-    }
-
-    const usuario = await Usuario.findByIdAndUpdate( id, nombreReal );
-
-    res.json(usuario);
-}
-
-
-
-//Actualizar Apellido
-const usuariosPutApellido = async(req, res = response) => {
-
-    const { id } = req.params;
-    const { _id, apellido } = req.body;
-
-    const usuario = await Usuario.findByIdAndUpdate( id, apellido );
-
-    res.json(usuario);
-}
-
-
-//Actualizar Contraseña
-const usuariosPutContraseña = async(req, res = response) => {
-
-    const { id } = req.params;
-    const { _id, password } = req.body;
-
-    const usuario = await Usuario.findByIdAndUpdate( id, password );
-
-    res.json(usuario);
-}
-
-//Actualizar Descripcion
-const usuariosPutDescripcion = async(req, res = response) => {
-
-    const { id } = req.params;
-    const { _id, descripcion } = req.body;
-
-    const usuario = await Usuario.findByIdAndUpdate( id, descripcion );
-
-    res.json(usuario);
-}
-
-
-
 
 
 const usuariosPatch = (req, res = response) => {
@@ -159,8 +104,5 @@ module.exports = {
     usuariosPost,
     usuariosPut,
     usuariosPatch,
-    usuariosDelete,
-    usuariosPutnombreRel,
-    usuariosPutApellido,
-    usuariosPutDescripcion
+    usuariosDelete
 }

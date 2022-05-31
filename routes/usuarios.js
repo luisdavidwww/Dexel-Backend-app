@@ -17,9 +17,6 @@ const { usuariosGet,
         usuariosPut,
         usuariosPost,
         usuariosDelete,
-        usuariosPutnombreRel,
-        usuariosPutApellido,
-        usuariosPutDescripcion,
         usuariosPatch } = require('../controllers/usuarios');
 
 const router = Router();
@@ -40,34 +37,6 @@ router.put('/:id',[
     check('rol').custom( esRoleValido ), 
     validarCampos
 ],usuariosPut );
-
-
-//Actualizar Nombre Real
-router.put('/:id',[
-    check('id', 'No es un ID válido').isMongoId(),
-    check('id').custom( existeUsuarioPorId ),
-    check('rol').custom( esRoleValido ), 
-    validarCampos
-],usuariosPutnombreRel );
-
-
-//Actualizar Apellido
-router.put('/:id',[
-    check('id', 'No es un ID válido').isMongoId(),
-    check('id').custom( existeUsuarioPorId ),
-    check('rol').custom( esRoleValido ), 
-    validarCampos
-],usuariosPutApellido );
-
-
-//Actualizar Descripcion
-router.put('/:id',[
-    check('id', 'No es un ID válido').isMongoId(),
-    check('id').custom( existeUsuarioPorId ),
-    check('rol').custom( esRoleValido ), 
-    validarCampos
-],usuariosPutDescripcion );
-
 
 
 
